@@ -1,0 +1,27 @@
+{
+  "name": "payroll",
+  "version": "1.0.0",
+  "description": "payroll rest-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EbsaTeklu/payroll.git"
+  },
+  "author": "Ebsa Teklu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EbsaTeklu/payroll/issues"
+  },
+  "homepage": "https://github.com/EbsaTeklu/payroll#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "g": "^2.0.1",
+    "mongoose": "^6.5.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19"
+  }
+}
