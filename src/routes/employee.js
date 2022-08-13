@@ -1,6 +1,6 @@
 const express=require("express")
 const mongoose=require("mongoose")
-const Employee=require("../model/employee")
+const Employee=require("../model/Employee")
 const router=express.Router()
 router.get('/',(req,res)=>{
     Employee.find()
