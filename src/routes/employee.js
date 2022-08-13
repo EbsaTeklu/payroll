@@ -6,12 +6,12 @@ router.post('/',(req,res)=>{
     const employee=new Employee({
         _id:mongoose.Types.ObjectId(),
         name:{
-            firstname:"ebsa",
-            lastname:"teklu"
+            firstname:req.body.name.firstname,
+            lastname:req.body.name.lastname
         },
-        phone:"0930",
-        salary:1000,
-        department:"finance"
+        phone:req.body.phone,
+        salary:req.body.salary,
+        department:req.body.department
     })
     employee.save()
     .then(emp=>{
