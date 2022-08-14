@@ -44,7 +44,7 @@ router.post('/',(req,res)=>{
     })
     rule.save()
     .then(rule=>{
-        return res.status(200).json({
+        return res.status(201).json({
             message:"Rule created!",
             rule:rule
         })
