@@ -40,8 +40,7 @@ router.post('/',(req,res)=>{
         income:req.body.income,
         deduction:req.body.deduction
     })
-    rule.populate("Employee","name salary")
-    .save()
+    rule.save()
     .then(rule=>{
         return res.status(200).json({
             message:"Rule created!",

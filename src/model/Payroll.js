@@ -6,11 +6,6 @@ const PayrollSchema=mongoose.Schema({
         ref:"Employee",
         required:true
     },
-    incomeTax:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Rule",
-        // required:true
-    },
     allowance:{
         type:Number,
         default:0
@@ -19,14 +14,13 @@ const PayrollSchema=mongoose.Schema({
         type:Number,
         default:0
     },
-    totalIncome:{
-        type:Number
+    pension:{
+        type:Number,
+        default:7
     },
-    totalDeduction:{
-        type:Number
-    },
-    netSalary:{
-        type:Number
+    penality:{
+        type:Number,
+        default:0
     }
 })
 module.exports=mongoose.model("Payroll",PayrollSchema)

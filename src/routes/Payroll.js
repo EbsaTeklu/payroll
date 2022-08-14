@@ -6,12 +6,28 @@ const Rule=require('../model/Rule')
 const router=express.Router()
 router.get('/',(req,res)=>{
     Payroll.find()
-    // .populate("Employee")
+    .populate("employee","name salary")
     .exec()
     .then(payrolls=>{
         return res.status(200).json({
             count:payrolls.length,
-            payrolls:payrolls
+            payrolls:payrolls.map((payroll)=>{
+                const totalIncome=payroll.employee.salary+payroll.allowance+payroll.overtime
+                const totalDeduction=(payroll.employee.salary*(payroll.pension/100))+payroll.penality
+                return {
+                    id:payroll._id,
+                    empid:payroll.employee._id,
+                    name:payroll.employee.name,
+                    salary:payroll.employee.salary,
+                    allowance:payroll.allowance,
+                    overtime:payroll.overtime,
+                    totalIncome:totalIncome,
+                    pension:payroll.pension,
+                    penality:payroll.penality,
+                    totalDeduction:totalDeduction,
+                    netSalary:totalIncome-totalDeduction
+                }
+            })
         })
     })
     .catch(err=>{
@@ -23,14 +39,31 @@ router.get('/',(req,res)=>{
 })
 router.get('/:id',(req,res)=>{
     const id=req.params.id
-    Payroll.findById(id).exec()
+    Payroll.findById(id)
+    // .select("employee allowance")
+    .populate("employee","name salary")
+    .exec()
     .then(payroll=>{
         if (!payroll) {
             return res.status(404).json({
                 message:"Payroll not found!"
             })
         }
-        return res.status(200).json(payroll)
+        const totalIncome=payroll.employee.salary+payroll.allowance+payroll.overtime
+        const totalDeduction=(payroll.employee.salary*(payroll.pension/100))+payroll.penality
+        return res.status(200).json({
+                    id:payroll._id,
+                    empid:payroll.employee._id,
+                    name:payroll.employee.name,
+                    salary:payroll.employee.salary,
+                    allowance:payroll.allowance,
+                    overtime:payroll.overtime,
+                    totalIncome:totalIncome,
+                    pension:payroll.pension,
+                    penality:payroll.penality,
+                    totalDeduction:totalDeduction,
+                    netSalary:totalIncome-totalDeduction
+        })
     })
     .catch(err=>{
         return res.status(500).json({
@@ -41,7 +74,8 @@ router.get('/:id',(req,res)=>{
 })
 router.post('/',(req,res)=>{
     const empId=req.body.employee
-    Employee.findById(empId).exec()
+    Employee.findById(empId)
+    .exec()
     .then(employee=>{
         if (!employee) {
             return res.status(404).json({
@@ -53,9 +87,8 @@ router.post('/',(req,res)=>{
             employee:empId,
             allowance:req.body.allowance,
             overtime:req.body.overtime,
-            totalIncome:req.body.totalIncome,
-            totalDeduction:req.body.totalDeduction,
-            incomeTax:req.body.incomeTax
+            pension:req.body.pension,
+            penality:req.body.penality
         })
         payroll.save().then(payroll=>{
             return res.status(201).json(payroll)
