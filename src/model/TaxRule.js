@@ -1,16 +1,16 @@
 const mongoose=require("mongoose")
 const ruleSchema=mongoose.Schema({
     _id:mongoose.Schema.Types.ObjectId,
-    name:{
-        type:String,
-        required:true
+    range:{
+        min:{
+            type:Number
+        },
+        max:{
+            type:Number
+        },
     },
-    income:{
+    tax:{
         type:Number
-    },
-    deduction:{
-        type:Number,
-        required:true
     },
 })
 module.exports=mongoose.model("Rule",ruleSchema)

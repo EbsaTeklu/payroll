@@ -1,6 +1,6 @@
 const express=require("express")
 const mongoose=require("mongoose")
-const Rule=require("../model/Rule")
+const Rule=require("../model/TaxRule")
 const router=express.Router()
 router.get('/',(req,res)=>{
     Rule.find().exec()
@@ -36,9 +36,11 @@ router.get('/:id',(req,res)=>{
 router.post('/',(req,res)=>{
     const rule=new Rule({
         _id:mongoose.Types.ObjectId(),
-        name:req.body.name,
-        income:req.body.income,
-        deduction:req.body.deduction
+        tax:req.body.tax,
+        range:{
+            min:req.body.range.min,
+            max:req.body.range.max
+        }
     })
     rule.save()
     .then(rule=>{
@@ -56,9 +58,11 @@ router.post('/',(req,res)=>{
 router.patch('/:id',(req,res)=>{
     const id= req.params.id
     Rule.findByIdAndUpdate(id,{
-        name:req.body.name,
-        income:req.body.income,
-        deduction:req.body.deduction
+        tax:req.body.tax,
+        range:{
+            min:req.body.range.min,
+            max:req.body.range.max
+        }
     }).exec()
     .then(rule=>{
         if (!rule) {
