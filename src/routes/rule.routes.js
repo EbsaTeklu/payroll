@@ -1,6 +1,6 @@
 const express=require("express")
 const mongoose=require("mongoose")
-const Rule=require("../model/TaxRule")
+const Rule=require("../model/taxrule.model")
 const router=express.Router()
 router.get('/',(req,res)=>{
     Rule.find().exec()

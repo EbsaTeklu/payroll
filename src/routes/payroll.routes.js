@@ -1,8 +1,8 @@
 const express=require('express')
 const mongoose=require('mongoose')
-const Payroll=require('../model/Payroll')
-const Employee=require('../model/Employee')
-const Rule=require('../model/TaxRule')
+const Payroll=require('../model/payroll.model')
+const Employee=require('../model/employee.model')
+const Rule=require('../model/taxrule.model')
 const router=express.Router()
 router.get('/',(req,res)=>{
     Payroll.find()
