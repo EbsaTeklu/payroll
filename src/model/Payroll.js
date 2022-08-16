@@ -4,7 +4,7 @@ const PayrollSchema=mongoose.Schema({
     employee:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Employee",
-        required:true
+        required:[true,"employee id is required"]
     },
     allowance:{
         type:Number,
