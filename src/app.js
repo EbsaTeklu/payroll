@@ -10,9 +10,9 @@ function createApp() {
     app.use(morgan('dev'))
     app.use(bodyParser.urlencoded({extended:false}))
     app.use(bodyParser.json())
-    app.use('/employees',employees)
-    app.use('/rules',rules)
-    app.use('/payrolles',payrolles)
+    app.use('/api/v1/employees',employees)
+    app.use('/api/v1/rules',rules)
+    app.use('/api/v1/payrolles',payrolles)
     app.get("/",(req,res)=>{
         res.status(200).json({
             message:"Payroll Rest API"
@@ -20,4 +20,4 @@ function createApp() {
     })
     return app
 }
-module.exports={createApp}
+module.exports= { createApp }

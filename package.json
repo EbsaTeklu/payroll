@@ -4,7 +4,7 @@
   "description": "payroll rest-api",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/server.js"
+    "start": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
